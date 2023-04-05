@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import { gte, inc, parse, ReleaseType, SemVer, valid } from 'semver';
+import { gte, inc, parse, ReleaseType, SemVer, valid, prerelease } from 'semver';
 import { analyzeCommits } from '@semantic-release/commit-analyzer';
 import { generateNotes } from '@semantic-release/release-notes-generator';
 import {
@@ -164,9 +164,20 @@ export default async function main() {
       bump = bump.replace(preReg, '');
     }
 
-    const releaseType: ReleaseType = isPrerelease
+    let releaseType: ReleaseType = isPrerelease
       ? `pre${bump}`
       : bump || defaultBump;
+
+    if (isPrerelease &&
+      defaultPreReleaseBump=="prerelease" &&
+      prerelease(previousTag.name) == null &&
+      defaultBump != "false" &&
+      !customTag &&
+      !customReleaseRules
+    ) {
+      releaseType = defaultBump;
+    }
+
     core.setOutput('release_type', releaseType);
 
     const incrementedVersion = inc(previousVersion, releaseType, identifier);
