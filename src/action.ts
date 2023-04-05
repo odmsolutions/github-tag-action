@@ -167,15 +167,11 @@ export default async function main() {
     let releaseType: ReleaseType = isPrerelease
       ? `pre${bump}`
       : bump || defaultBump;
-
-    if (isPrerelease &&
-      defaultPreReleaseBump=="prerelease" &&
-      prerelease(previousTag.name) == null &&
-      defaultBump != "false" &&
-      !customTag &&
-      !customReleaseRules
-    ) {
-      releaseType = defaultBump;
+    const initialPrereleaseBump = core.getInput("initial_prerelease_bump")  as ReleaseType | 'false';
+    if (releaseType == "prerelease"  && initialPrereleaseBump != "false") {
+      if (previousVersion.prerelease.length == 0) {
+        releaseType = initialPrereleaseBump
+      }
     }
 
     core.setOutput('release_type', releaseType);

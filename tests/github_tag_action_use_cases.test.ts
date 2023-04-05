@@ -80,6 +80,7 @@ describe('develop-versioning-process', () => {
     /*
      * Given
      */
+    // setInput('initial_prerelease_bump', 'preminor'); // TODO: works too for dev
     setInput("custom_tag", "0.1.0-dev.0");
     const commits = [
       { message: 'Initial commit', hash: null },
@@ -107,7 +108,6 @@ describe('develop-versioning-process', () => {
     await runAndExpectTag('v0.1.0-dev.1', validTags, commits);
   });
 
-  // TODO: Additional prerelease test here - with the v1.0.0 and other tags. - do we get v1.0.0-dev.0, and dev.1 after that.
   it("increments the next prerelease dev tag with v1.0.0 release", async () => {
     /*
       * Given
@@ -115,7 +115,7 @@ describe('develop-versioning-process', () => {
     const commits = [
       { message: 'PE-1234: Merged a PR', hash: null },
     ];
-    setInput('default_bump', 'preminor');
+    setInput('initial_prerelease_bump', 'preminor');
 
     const validTags = [
       {

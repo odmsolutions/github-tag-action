@@ -59,7 +59,10 @@ inputs:
     description: "Do not perform tagging, just calculate next version and changelog, then exit."
     required: false
     default: "false"
-
+  initial_prerelease_bump: 
+    description: "Default to use if making a prerelease for the first time"
+    default: "prepatch"
+    required: false
 runs:
   using: "node16"
   main: "lib/main.js"
