@@ -184,6 +184,50 @@ describe('utils', () => {
     });
   });
 
+  describe('method: getLatestPrereleaseTag', () => {
+    it('Should detect the most recent dev tag', () => {
+      const expectedLatest = {
+        name: 'v1.0.0-dev.0',
+        commit: { sha: '012345', url: '' },
+        zipball_url: '',
+        tarball_url: 'string',
+        node_id: 'string',
+      };
+      const validTags = [
+        {
+          name: 'v1.0.0',
+          commit: { sha: '012345', url: '' },
+          zipball_url: '',
+          tarball_url: 'string',
+          node_id: 'string',
+        },
+        {
+          name: 'v1.0.0-rc.0',
+          commit: { sha: '012345', url: '' },
+          zipball_url: '',
+          tarball_url: 'string',
+          node_id: 'string',
+        },
+        expectedLatest,
+        {
+          name: 'v0.1.0-dev.0',
+          commit: { sha: '012345', url: '' },
+          zipball_url: '',
+          tarball_url: 'string',
+          node_id: 'string',
+        },
+      ];
+      const identifier = 'dev';
+      const prefixRegex = /^v/;
+      const latestPrereleaseTag = utils.getLatestPrereleaseTag(
+        validTags,
+        identifier,
+        prefixRegex
+      );
+      expect(latestPrereleaseTag).toBe(expectedLatest);
+    });
+  });
+
   describe('custom release types', () => {
     it('maps custom release types', () => {
       /*
