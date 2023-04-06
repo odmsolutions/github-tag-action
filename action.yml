@@ -60,7 +60,7 @@ inputs:
     required: false
     default: "false"
   initial_prerelease_bump: 
-    description: "Default to use if making a prerelease for the first time"
+    description: "A default prerelease bump to apply if no prerelease information is present on the latest tag. Defaults to prepatch."
     default: "prepatch"
     required: false
 runs:
