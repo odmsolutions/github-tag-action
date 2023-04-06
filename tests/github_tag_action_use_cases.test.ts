@@ -48,7 +48,7 @@ describe('develop-versioning-process', () => {
     loadDefaultInputs();
     setInput('default_prerelease_bump', 'prerelease');
     setInput('append_to_pre_release_tag', 'dev');
-    /* Unset this */
+    /* Unset these (loadDefaultInputs doesn't unset items without defaults ) */
     setInput('custom_tag', '');
     setInput('default_bump', '');
   });
