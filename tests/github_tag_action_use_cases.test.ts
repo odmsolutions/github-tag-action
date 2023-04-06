@@ -1,10 +1,3 @@
-/*
-  These tests are intended to run against the github-tag-action code.
-  These are copied over to the github-tag-action repository and run there.
-  They are to demonstrate and prove our specific use case, with a run through our versioning scenario.
-  They are perhaps too specific to our case to belong in the github-tag-action repo, but complement the tests within
-  that repository.
-*/
 import action from '../src/action';
 import * as utils from '../src/utils';
 import * as github from '../src/github';
