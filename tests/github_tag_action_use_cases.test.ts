@@ -53,13 +53,13 @@ describe('develop-versioning-process', () => {
     setInput('default_bump', '');
   });
 
-  async function runAndExpectTag(tagName: string, validTags: any, commits: any=[]) {
-    jest
-      .spyOn(utils, 'getCommits')
-      .mockImplementation(async (sha) => commits);
-    jest
-      .spyOn(utils, 'getValidTags')
-      .mockImplementation(async () => validTags);
+  async function runAndExpectTag(
+    tagName: string,
+    validTags: any,
+    commits: any = []
+  ) {
+    jest.spyOn(utils, 'getCommits').mockImplementation(async (sha) => commits);
+    jest.spyOn(utils, 'getValidTags').mockImplementation(async () => validTags);
     /*
      * When
      */
@@ -75,26 +75,22 @@ describe('develop-versioning-process', () => {
     expect(mockSetFailed).not.toBeCalled();
   }
 
-  it("creates initial dev tag with custom input", async () => {
+  it('creates initial dev tag with custom input', async () => {
     // This only works if explicit
     /*
      * Given
      */
     // setInput('initial_prerelease_bump', 'preminor'); // TODO: works too for dev
-    setInput("custom_tag", "0.1.0-dev.0");
-    const commits = [
-      { message: 'Initial commit', hash: null },
-    ];
+    setInput('custom_tag', '0.1.0-dev.0');
+    const commits = [{ message: 'Initial commit', hash: null }];
     await runAndExpectTag('v0.1.0-dev.0', []);
   });
 
-  it("increments the next prerelease dev tag", async () => {
+  it('increments the next prerelease dev tag', async () => {
     /*
-      * Given
-      */
-    const commits = [
-      { message: 'PE-1234: Merged a PR', hash: null },
-    ];
+     * Given
+     */
+    const commits = [{ message: 'PE-1234: Merged a PR', hash: null }];
 
     const validTags = [
       {
@@ -108,13 +104,11 @@ describe('develop-versioning-process', () => {
     await runAndExpectTag('v0.1.0-dev.1', validTags, commits);
   });
 
-  it("increments the next prerelease dev tag with v1.0.0 release", async () => {
+  it('increments the next prerelease dev tag with v1.0.0 release', async () => {
     /*
-      * Given
-      */
-    const commits = [
-      { message: 'PE-1234: Merged a PR', hash: null },
-    ];
+     * Given
+     */
+    const commits = [{ message: 'PE-1234: Merged a PR', hash: null }];
     setInput('initial_prerelease_bump', 'preminor');
 
     const validTags = [
@@ -150,12 +144,12 @@ describe('develop-versioning-process', () => {
     await runAndExpectTag('v1.1.0-dev.0', validTags, commits);
   });
 
-  it("creates an rc tag - with version bump", async () => {
+  it('creates an rc tag - with version bump', async () => {
     /*
      * Given
      */
     setInput('append_to_pre_release_tag', 'rc');
-    setInput('default_prerelease_bump', 'minor')
+    setInput('default_prerelease_bump', 'minor');
     /* Commits will be since the last valid rc tag */
     const commits: any[] = [
       { message: 'Dev 0 commit', hash: null },
@@ -188,14 +182,12 @@ describe('develop-versioning-process', () => {
     await runAndExpectTag('v0.2.0-rc.0', validTags, commits);
   });
 
-
-
-  it("creates a dev tag with a minor bump", async () => {
+  it('creates a dev tag with a minor bump', async () => {
     /*
      * Given
      */
     setInput('append_to_pre_release_tag', 'dev');
-    setInput('default_prerelease_bump', 'minor')
+    setInput('default_prerelease_bump', 'minor');
 
     const validTags = [
       {
@@ -216,12 +208,12 @@ describe('develop-versioning-process', () => {
     await runAndExpectTag('v0.2.0-dev.0', validTags, []);
   });
 
-  it("promotes the rc tag to production", async () => {
+  it('promotes the rc tag to production', async () => {
     /*
      * Given
      */
     setBranch('main');
-    setInput("custom_tag", "2.3.0");
+    setInput('custom_tag', '2.3.0');
 
     const validTags = [
       {

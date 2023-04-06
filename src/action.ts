@@ -1,5 +1,13 @@
 import * as core from '@actions/core';
-import { gte, inc, parse, ReleaseType, SemVer, valid, prerelease } from 'semver';
+import {
+  gte,
+  inc,
+  parse,
+  ReleaseType,
+  SemVer,
+  valid,
+  prerelease,
+} from 'semver';
 import { analyzeCommits } from '@semantic-release/commit-analyzer';
 import { generateNotes } from '@semantic-release/release-notes-generator';
 import {
@@ -167,10 +175,12 @@ export default async function main() {
     let releaseType: ReleaseType = isPrerelease
       ? `pre${bump}`
       : bump || defaultBump;
-    const initialPrereleaseBump = core.getInput("initial_prerelease_bump")  as ReleaseType | 'false';
-    if (releaseType == "prerelease"  && initialPrereleaseBump != "false") {
+    const initialPrereleaseBump = core.getInput('initial_prerelease_bump') as
+      | ReleaseType
+      | 'false';
+    if (releaseType == 'prerelease' && initialPrereleaseBump != 'false') {
       if (previousVersion.prerelease.length == 0) {
-        releaseType = initialPrereleaseBump
+        releaseType = initialPrereleaseBump;
       }
     }
 

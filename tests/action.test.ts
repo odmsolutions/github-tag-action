@@ -563,7 +563,7 @@ describe('github-tag-action', () => {
         expect.any(Boolean),
         expect.any(String)
       );
-      expect(mockSetFailed).not.toBeCalled();      
+      expect(mockSetFailed).not.toBeCalled();
     });
 
     it('does create prepatch tag', async () => {
