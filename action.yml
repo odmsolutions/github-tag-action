@@ -25,7 +25,7 @@ inputs:
     required: false
     default: "prerelease"
   initial_prerelease_bump: 
-    description: "An initial prerelease bump to apply if no prerelease information is present on the latest tag. Defaults to prepatch."
+    description: "An initial prerelease bump to apply if no prerelease information is present on the latest tag. (default: `prepatch`)."
     default: "prepatch"
     required: false
   tag_prefix:
