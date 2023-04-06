@@ -46,11 +46,11 @@ jobs:
 
 - **default_bump** _(optional)_ - Which type of bump to use when [none is explicitly provided](#bumping) when commiting to a release branch (default: `patch`). You can also set `false` to avoid generating a new tag when none is explicitly provided. Can be `patch, minor or major`.
 - **default_prerelease_bump** _(optional)_ - Which type of bump to use when [none is explicitly provided](#bumping) when commiting to a prerelease branch (default: `prerelease`). You can also set `false` to avoid generating a new tag when none is explicitly provided. Can be `prerelease, prepatch, preminor or premajor`.
+- **initial_prerelease_bump** _(optional)_ - An initial prerelease bump to apply if no prerelease information is present on the latest tag. Defaults to prepatch.
 - **custom_tag** _(optional)_ - Custom tag name. If specified, it overrides bump settings.
 - **create_annotated_tag** _(optional)_ - Boolean to create an annotated rather than a lightweight one (default: `false`).
 - **tag_prefix** _(optional)_ - A prefix to the tag name (default: `v`).
 - **append_to_pre_release_tag** _(optional)_ - A suffix to the pre-release tag name (default: `<branch>`).
-- **initial_prerelease_bump** _(optional)_ - A default prerelease bump to apply if no prerelease information is present on the latest tag. Defaults to prepatch.
 
 #### Customize the conventional commit messages & titles of changelog sections
 
